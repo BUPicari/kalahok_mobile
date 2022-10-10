@@ -1,6 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:kalahok_mobile/src/screens/Home.dart';
+import 'package:kalahok_mobile/src/screens/home.screen.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,13 +12,14 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
+      debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
         splash: Image.asset('assets/images/kalahok-logo.png'),
         splashIconSize: double.infinity,
         backgroundColor: Colors.indigo,
         duration: 3000,
         splashTransition: SplashTransition.fadeTransition,
-        nextScreen: const Home(title: "Kalahok"),
+        nextScreen: const HomeScreen(title: "Kalahok"),
       ),
     );
   }
