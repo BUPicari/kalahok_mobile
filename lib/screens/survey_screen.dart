@@ -27,34 +27,46 @@ class SurveyScreen extends StatelessWidget {
             if (state is SurveyLoadedState) {
               List<Survey> surveyList = state.surveys;
               return ListView.builder(
-                  itemCount: surveyList.length,
-                  itemBuilder: (_, index) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Card(
-                        color: Colors.blue,
-                        elevation: 4,
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          title: Text(
-                            surveyList[index].firstname,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          subtitle: Text(
-                            surveyList[index].lastname,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          trailing: CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(surveyList[index].avatar),
-                          ),
+                itemCount: surveyList.length,
+                itemBuilder: (_, i) {
+                  List<Choices> choices = surveyList[i].choices;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Card(
+                      color: Colors.blue,
+                      elevation: 4,
+                      margin: const EdgeInsets.symmetric(vertical: 10),
+                      child: ListTile(
+                        title: Text(
+                          surveyList[i].question,
+                          style: const TextStyle(color: Colors.white),
                         ),
+                        subtitle: Text('a: ${choices[0].name}'),
+                        // subtitle: ListView.builder(
+                        //   itemCount: choices.length,
+                        //   itemBuilder: (_, j) {
+                        //     return Padding(
+                        //       padding:
+                        //           const EdgeInsets.symmetric(horizontal: 5),
+                        //       child: Card(
+                        //         color: Colors.blue,
+                        //         elevation: 4,
+                        //         margin: const EdgeInsets.symmetric(vertical: 5),
+                        //         child: ListTile(
+                        //           title: Text('$j: ${choices[j].name}'),
+                        //         ),
+                        //       ),
+                        //     );
+                        //   },
+                        // ),
                       ),
-                    );
-                  });
+                    ),
+                  );
+                },
+              );
             }
             if (state is SurveyErrorState) {
-              return const Center(child: Text('Error'));
+              return Center(child: Text(state.error));
             }
             return Container();
           },
