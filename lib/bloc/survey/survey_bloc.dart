@@ -13,14 +13,11 @@ class SurveyBloc extends Bloc<SurveyEvent, SurveyState> {
   SurveyBloc(this._surveyRepository) : super(SurveyLoadingState()) {
     on<LoadSurveyEvent>((event, emit) async {
       emit(SurveyLoadingState());
-      // print('SurveyLoadingState');
       try {
         final surveys = await _surveyRepository.getSurveys();
         emit(SurveyLoadedState(surveys));
-        // print('SurveyLoadedState');
       } catch (e) {
         emit(SurveyErrorState(e.toString()));
-        // print('SurveyErrorState');
       }
     });
   }
