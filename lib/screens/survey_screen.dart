@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalahok_mobile/bloc/survey/survey_bloc.dart';
 import 'package:kalahok_mobile/data/models/survey_model.dart';
 import 'package:kalahok_mobile/data/repositories/survey_repo.dart';
+import 'package:kalahok_mobile/screens/widgets/question_widget.dart';
 
 class SurveyScreen extends StatelessWidget {
   const SurveyScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class SurveyScreen extends StatelessWidget {
       )..add(LoadSurveyEvent()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Survey'),
+          title: const Text('Kalahok'),
         ),
         body: BlocBuilder<SurveyBloc, SurveyState>(
           builder: (context, state) {
@@ -25,28 +26,7 @@ class SurveyScreen extends StatelessWidget {
               );
             }
             if (state is SurveyLoadedState) {
-              List<Survey> surveyList = state.surveys;
-              return ListView.builder(
-                itemCount: surveyList.length,
-                itemBuilder: (_, i) {
-                  List<Choices> choices = surveyList[i].choices;
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Card(
-                      color: Colors.blueGrey,
-                      elevation: 4,
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: ListTile(
-                        title: Text(
-                          surveyList[i].question,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        subtitle: Text('a: ${choices[0].name}'),
-                      ),
-                    ),
-                  );
-                },
-              );
+              return QuestionWidget(survey: state.survey);
             }
             if (state is SurveyErrorState) {
               return Center(child: Text(state.error));

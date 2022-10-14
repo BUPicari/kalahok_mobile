@@ -14,8 +14,8 @@ class SurveyBloc extends Bloc<SurveyEvent, SurveyState> {
     on<LoadSurveyEvent>((event, emit) async {
       emit(SurveyLoadingState());
       try {
-        final surveys = await _surveyRepository.getSurveys();
-        emit(SurveyLoadedState(surveys));
+        final survey = await _surveyRepository.getSurvey();
+        emit(SurveyLoadedState(survey));
       } catch (e) {
         emit(SurveyErrorState(e.toString()));
       }

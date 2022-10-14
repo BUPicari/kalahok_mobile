@@ -1,12 +1,51 @@
 class Survey {
   int id;
+  String title;
+  int answeredCount;
+  String completionEstimatedTime;
+  bool status;
+  String addedAt;
+  String updatedAt;
+  List<Question> questionnaires;
+
+  Survey({
+    required this.id,
+    required this.title,
+    required this.answeredCount,
+    required this.completionEstimatedTime,
+    required this.status,
+    required this.addedAt,
+    required this.updatedAt,
+    required this.questionnaires,
+  });
+
+  factory Survey.fromJson(Map<String, dynamic> json) {
+    var questionnairesJson = json['questionnaires'] as List;
+    List<Question> questions =
+        questionnairesJson.map((e) => Question.fromJson(e)).toList();
+
+    return Survey(
+      id: json['id'],
+      title: json['title'],
+      answeredCount: json['answered_count'],
+      completionEstimatedTime: json['completion_estimated_time'],
+      status: json['status'],
+      addedAt: json['added_at'],
+      updatedAt: json['updated_at'],
+      questionnaires: questions,
+    );
+  }
+}
+
+class Question {
+  int id;
   String question;
   String type;
-  List<Choices> choices;
+  List<Choice> choices;
   String addedAt;
   String updatedAt;
 
-  Survey({
+  Question({
     required this.id,
     required this.question,
     required this.type,
@@ -15,33 +54,33 @@ class Survey {
     required this.updatedAt,
   });
 
-  factory Survey.fromJson(Map<String, dynamic> json) {
+  factory Question.fromJson(Map<String, dynamic> json) {
     var choicesJson = json['choices'] as List;
-    List<Choices> c = choicesJson.map((e) => Choices.fromJson(e)).toList();
-    if (c.isEmpty) {
-      c.add(Choices(name: 'Choice #1'));
+    List<Choice> choices = choicesJson.map((e) => Choice.fromJson(e)).toList();
+    if (choices.isEmpty) {
+      choices.add(Choice(name: 'Choice #1'));
     }
 
-    return Survey(
+    return Question(
       id: json['id'],
       question: json['question'],
       type: json['type'],
-      choices: c,
+      choices: choices,
       addedAt: json['added_at'],
       updatedAt: json['updated_at'],
     );
   }
 }
 
-class Choices {
+class Choice {
   String name;
 
-  Choices({
+  Choice({
     required this.name,
   });
 
-  factory Choices.fromJson(Map<String, dynamic> json) {
-    return Choices(
+  factory Choice.fromJson(Map<String, dynamic> json) {
+    return Choice(
       name: json['name'],
     );
   }

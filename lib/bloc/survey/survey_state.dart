@@ -11,11 +11,11 @@ class SurveyLoadingState extends SurveyState {
 
 //survey loaded state
 class SurveyLoadedState extends SurveyState {
-  SurveyLoadedState(this.surveys);
-  final List<Survey> surveys;
+  SurveyLoadedState(this.survey);
+  final Survey survey;
 
   @override
-  List<Object> get props => [surveys];
+  List<Object> get props => [survey];
 }
 
 //survey error loading state
