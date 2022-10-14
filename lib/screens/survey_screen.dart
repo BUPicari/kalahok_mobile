@@ -31,9 +31,9 @@ class SurveyScreen extends StatelessWidget {
                 itemBuilder: (_, i) {
                   List<Choices> choices = surveyList[i].choices;
                   return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     child: Card(
-                      color: Colors.blue,
+                      color: Colors.blueGrey,
                       elevation: 4,
                       margin: const EdgeInsets.symmetric(vertical: 10),
                       child: ListTile(
@@ -42,23 +42,6 @@ class SurveyScreen extends StatelessWidget {
                           style: const TextStyle(color: Colors.white),
                         ),
                         subtitle: Text('a: ${choices[0].name}'),
-                        // subtitle: ListView.builder(
-                        //   itemCount: choices.length,
-                        //   itemBuilder: (_, j) {
-                        //     return Padding(
-                        //       padding:
-                        //           const EdgeInsets.symmetric(horizontal: 5),
-                        //       child: Card(
-                        //         color: Colors.blue,
-                        //         elevation: 4,
-                        //         margin: const EdgeInsets.symmetric(vertical: 5),
-                        //         child: ListTile(
-                        //           title: Text('$j: ${choices[j].name}'),
-                        //         ),
-                        //       ),
-                        //     );
-                        //   },
-                        // ),
                       ),
                     ),
                   );

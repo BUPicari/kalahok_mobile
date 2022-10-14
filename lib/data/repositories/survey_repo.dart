@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:kalahok_mobile/config/api.config.dart';
+import 'package:kalahok_mobile/config/api_config.dart';
 import 'package:kalahok_mobile/data/models/survey_model.dart';
 
 class SurveyRepository {

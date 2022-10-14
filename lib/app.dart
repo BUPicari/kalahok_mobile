@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Kalahok',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       debugShowCheckedModeBanner: false,
       home: AnimatedSplashScreen(
