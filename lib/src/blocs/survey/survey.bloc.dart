@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalahok_mobile/src/blocs/survey/survey.state.dart';
 import 'package:kalahok_mobile/src/models/survey.model.dart';
-import 'package:kalahok_mobile/src/repositories/survey.repo.dart';
+import 'package:kalahok_mobile/src/repositories/survey/survey.repo.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 class SurveyBloc extends Cubit<SurveyState> {
