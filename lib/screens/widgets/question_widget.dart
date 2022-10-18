@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/data/models/survey_model.dart';
 import 'package:kalahok_mobile/screens/widgets/choice_widget.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/open_ended.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/unkown.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/with_choices.dart';
 
 class QuestionWidget extends StatelessWidget {
   final Survey survey;
@@ -19,36 +22,25 @@ class QuestionWidget extends StatelessWidget {
   }
 
   Widget buildQuestion({required Question question}) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 32),
-          Text(
-            question.question,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'Please choose one choice from below',
-            style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
-          ),
-          const SizedBox(height: 32),
-          Expanded(
-            child: ChoiceWidget(
-              question: question,
-              // onClickedOption: onClickedOption,
-            ),
-          ),
-        ],
-      ),
-    );
+    switch (question.type) {
+      case "multipleChoice":
+        return WithChoicesQuestionWidget(
+          question: question,
+          subText: 'Please choose one choice from below',
+        );
+      case "openEnded":
+        return OpenEndedQuestionWidget(question: question);
+      case "trueOrFalse":
+        return WithChoicesQuestionWidget(
+          question: question,
+          subText: 'Please choose True or False from below',
+        );
+      // case "rating":
+      default:
+        return const UnknownQuestionWidget();
+    }
   }
 
   // Add the ff:
-  // widget for multiple choice
-  // widget for ratings
-  // widget open ended
-  // widget true or false
+  // widget for rating
 }

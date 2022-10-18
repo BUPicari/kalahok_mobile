@@ -42,6 +42,7 @@ class Question {
   String question;
   String type;
   List<Choice> choices;
+  // List<Rate> rates;
   String addedAt;
   String updatedAt;
 
@@ -50,6 +51,7 @@ class Question {
     required this.question,
     required this.type,
     required this.choices,
+    // required this.rates,
     required this.addedAt,
     required this.updatedAt,
   });
@@ -57,15 +59,25 @@ class Question {
   factory Question.fromJson(Map<String, dynamic> json) {
     var choicesJson = json['choices'] as List;
     List<Choice> choices = choicesJson.map((e) => Choice.fromJson(e)).toList();
-    if (choices.isEmpty) {
-      choices.add(Choice(name: 'Choice #1'));
+
+    // var ratesJson = json['rates'] as List;
+    // List<Rate> rates = ratesJson.map((e) => Rate.fromJson(e)).toList();
+
+    if (json['type'] == "trueOrFalse") {
+      choices.add(Choice(name: 'True'));
+      choices.add(Choice(name: 'False'));
     }
+
+    // if (rates.isEmpty && json['type'] == "rating") {
+    //   rates.add(Rate(min: 1, max: 10));
+    // }
 
     return Question(
       id: json['id'],
       question: json['question'],
       type: json['type'],
       choices: choices,
+      // rates: rates,
       addedAt: json['added_at'],
       updatedAt: json['updated_at'],
     );
@@ -82,6 +94,23 @@ class Choice {
   factory Choice.fromJson(Map<String, dynamic> json) {
     return Choice(
       name: json['name'],
+    );
+  }
+}
+
+class Rate {
+  int min;
+  int max;
+
+  Rate({
+    required this.min,
+    required this.max,
+  });
+
+  factory Rate.fromJson(Map<String, dynamic> json) {
+    return Rate(
+      min: json['min'],
+      max: json['max'],
     );
   }
 }

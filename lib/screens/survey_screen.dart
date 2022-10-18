@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalahok_mobile/bloc/survey/survey_bloc.dart';
-import 'package:kalahok_mobile/data/models/survey_model.dart';
 import 'package:kalahok_mobile/data/repositories/survey_repo.dart';
+import 'package:kalahok_mobile/screens/error_screen.dart';
 import 'package:kalahok_mobile/screens/widgets/question_widget.dart';
 
 class SurveyScreen extends StatelessWidget {
@@ -29,7 +29,8 @@ class SurveyScreen extends StatelessWidget {
               return QuestionWidget(survey: state.survey);
             }
             if (state is SurveyErrorState) {
-              return Center(child: Text(state.error));
+              // fix this ui later
+              return ErrorScreen(error: state.error);
             }
             return Container();
           },
