@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/data/models/survey_model.dart';
-import 'package:kalahok_mobile/screens/widgets/choice_widget.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/rate_widget.dart';
 
-class WithChoicesQuestionWidget extends StatelessWidget {
+class RatingQuestionWidget extends StatelessWidget {
   final Question question;
-  final String subText;
 
-  const WithChoicesQuestionWidget({
+  const RatingQuestionWidget({
     Key? key,
     required this.question,
-    required this.subText,
   }) : super(key: key);
 
   @override
@@ -25,16 +23,13 @@ class WithChoicesQuestionWidget extends StatelessWidget {
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
           ),
           const SizedBox(height: 8),
-          Text(
-            subText,
-            style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+          const Text(
+            'Please rate from below base on the question',
+            style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
           ),
           const SizedBox(height: 32),
           Expanded(
-            child: ChoiceWidget(
-              question: question,
-              // onClickedOption: onClickedOption,
-            ),
+            child: RateWidget(question: question),
           ),
         ],
       ),

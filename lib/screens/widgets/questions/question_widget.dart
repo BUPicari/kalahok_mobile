@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/data/models/survey_model.dart';
-import 'package:kalahok_mobile/screens/widgets/choice_widget.dart';
-import 'package:kalahok_mobile/screens/widgets/questions/open_ended.dart';
-import 'package:kalahok_mobile/screens/widgets/questions/unkown.dart';
-import 'package:kalahok_mobile/screens/widgets/questions/with_choices.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/open_ended_question_widget.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/rating_question_widget.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/unkown_question_widget.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/with_choices_question_widget.dart';
 
 class QuestionWidget extends StatelessWidget {
   final Survey survey;
@@ -35,12 +35,10 @@ class QuestionWidget extends StatelessWidget {
           question: question,
           subText: 'Please choose True or False from below',
         );
-      // case "rating":
+      case "rating":
+        return RatingQuestionWidget(question: question);
       default:
         return const UnknownQuestionWidget();
     }
   }
-
-  // Add the ff:
-  // widget for rating
 }

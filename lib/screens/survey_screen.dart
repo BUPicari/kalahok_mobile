@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalahok_mobile/bloc/survey/survey_bloc.dart';
 import 'package:kalahok_mobile/data/repositories/survey_repo.dart';
 import 'package:kalahok_mobile/screens/error_screen.dart';
-import 'package:kalahok_mobile/screens/widgets/question_widget.dart';
+import 'package:kalahok_mobile/screens/widgets/questions/question_widget.dart';
 
 class SurveyScreen extends StatelessWidget {
   const SurveyScreen({Key? key}) : super(key: key);

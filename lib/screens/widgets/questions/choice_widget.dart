@@ -4,13 +4,8 @@ import 'package:kalahok_mobile/utils.dart';
 
 class ChoiceWidget extends StatelessWidget {
   final Question question;
-  // final ValueChanged<Choice> onClickedOption;
 
-  const ChoiceWidget({
-    Key? key,
-    required this.question,
-    // required this.onClickedOption,
-  }) : super(key: key);
+  const ChoiceWidget({Key? key, required this.question}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +13,15 @@ class ChoiceWidget extends StatelessWidget {
       physics: const BouncingScrollPhysics(),
       children: Utils.heightBetween(
         question.choices
-            .map((choice) => buildChoiceContainer(context, choice))
+            .map((choice) => _buildChoiceContainer(context, choice))
             .toList(),
         height: 8,
       ),
     );
   }
 
-  Widget buildChoiceContainer(BuildContext context, Choice choice) {
+  Widget _buildChoiceContainer(BuildContext context, Choice choice) {
     return GestureDetector(
-      // onTap: () => onClickedOption(option),
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
@@ -36,14 +30,14 @@ class ChoiceWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            buildChoice(choice),
+            _buildChoice(choice),
           ],
         ),
       ),
     );
   }
 
-  Widget buildChoice(Choice choice) {
+  Widget _buildChoice(Choice choice) {
     return SizedBox(
       height: 50,
       child: Row(children: [

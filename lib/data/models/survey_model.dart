@@ -42,7 +42,7 @@ class Question {
   String question;
   String type;
   List<Choice> choices;
-  // List<Rate> rates;
+  List<Rate> rates;
   String addedAt;
   String updatedAt;
 
@@ -51,7 +51,7 @@ class Question {
     required this.question,
     required this.type,
     required this.choices,
-    // required this.rates,
+    required this.rates,
     required this.addedAt,
     required this.updatedAt,
   });
@@ -60,24 +60,24 @@ class Question {
     var choicesJson = json['choices'] as List;
     List<Choice> choices = choicesJson.map((e) => Choice.fromJson(e)).toList();
 
-    // var ratesJson = json['rates'] as List;
-    // List<Rate> rates = ratesJson.map((e) => Rate.fromJson(e)).toList();
+    var ratesJson = json['rates'] as List;
+    List<Rate> rates = ratesJson.map((e) => Rate.fromJson(e)).toList();
 
     if (json['type'] == "trueOrFalse") {
       choices.add(Choice(name: 'True'));
       choices.add(Choice(name: 'False'));
     }
 
-    // if (rates.isEmpty && json['type'] == "rating") {
-    //   rates.add(Rate(min: 1, max: 10));
-    // }
+    if (rates.isEmpty && json['type'] == "rating") {
+      rates.add(Rate(min: "1", max: "10"));
+    }
 
     return Question(
       id: json['id'],
       question: json['question'],
       type: json['type'],
       choices: choices,
-      // rates: rates,
+      rates: rates,
       addedAt: json['added_at'],
       updatedAt: json['updated_at'],
     );
@@ -99,8 +99,8 @@ class Choice {
 }
 
 class Rate {
-  int min;
-  int max;
+  String min;
+  String max;
 
   Rate({
     required this.min,
