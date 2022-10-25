@@ -3,10 +3,14 @@ import 'package:kalahok_mobile/data/models/survey_model.dart';
 
 class OpenEndedQuestionWidget extends StatelessWidget {
   final Question question;
+  final int itemCount;
+  final int index;
 
   const OpenEndedQuestionWidget({
     Key? key,
     required this.question,
+    required this.itemCount,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -16,6 +20,16 @@ class OpenEndedQuestionWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 15),
+          Text(
+            'Part $index of $itemCount',
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              fontStyle: FontStyle.italic,
+              color: Colors.indigo,
+            ),
+          ),
           const SizedBox(height: 32),
           Text(
             question.question,

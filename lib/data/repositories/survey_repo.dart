@@ -6,7 +6,7 @@ import 'package:kalahok_mobile/data/models/survey_model.dart';
 class SurveyRepository {
   Future<Survey> getSurvey() async {
     var url = Uri.parse(
-        '${ApiConfig.baseUrl}/surveys/current-active?category=unifast&format-date=true');
+        '${ApiConfig.baseUrl}/surveys/current-active?category=2&format-date=true');
     http.Response response = await http.get(url);
 
     if (response.statusCode == 200) {

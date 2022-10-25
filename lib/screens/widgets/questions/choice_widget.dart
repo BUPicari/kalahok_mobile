@@ -25,7 +25,7 @@ class ChoiceWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.blueGrey,
+          color: Colors.grey,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(

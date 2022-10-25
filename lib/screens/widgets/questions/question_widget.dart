@@ -16,27 +16,47 @@ class QuestionWidget extends StatelessWidget {
       itemCount: survey.questionnaires.length,
       itemBuilder: (context, index) {
         final question = survey.questionnaires[index];
-        return buildQuestion(question: question);
+        return buildQuestion(
+          question: question,
+          itemCount: survey.questionnaires.length,
+          index: index,
+        );
       },
     );
   }
 
-  Widget buildQuestion({required Question question}) {
+  Widget buildQuestion({
+    required Question question,
+    required int itemCount,
+    required int index,
+  }) {
     switch (question.type) {
       case "multipleChoice":
         return WithChoicesQuestionWidget(
           question: question,
           subText: 'Please choose one choice from below',
+          itemCount: itemCount,
+          index: index + 1,
         );
       case "openEnded":
-        return OpenEndedQuestionWidget(question: question);
+        return OpenEndedQuestionWidget(
+          question: question,
+          itemCount: itemCount,
+          index: index + 1,
+        );
       case "trueOrFalse":
         return WithChoicesQuestionWidget(
           question: question,
           subText: 'Please choose True or False from below',
+          itemCount: itemCount,
+          index: index + 1,
         );
       case "rating":
-        return RatingQuestionWidget(question: question);
+        return RatingQuestionWidget(
+          question: question,
+          itemCount: itemCount,
+          index: index + 1,
+        );
       default:
         return const UnknownQuestionWidget();
     }
