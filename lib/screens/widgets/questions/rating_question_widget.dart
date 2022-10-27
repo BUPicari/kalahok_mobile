@@ -28,7 +28,7 @@ class RatingQuestionWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 20,
               fontStyle: FontStyle.italic,
-              color: Colors.indigo,
+              color: Colors.blueGrey,
             ),
           ),
           const SizedBox(height: 32),

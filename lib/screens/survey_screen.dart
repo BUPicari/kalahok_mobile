@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalahok_mobile/bloc/survey/survey_bloc.dart';
-import 'package:kalahok_mobile/data/repositories/survey_repo.dart';
 import 'package:kalahok_mobile/screens/error_screen.dart';
 import 'package:kalahok_mobile/screens/widgets/questions/question_widget.dart';
 
@@ -11,9 +10,7 @@ class SurveyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SurveyBloc(
-        RepositoryProvider.of<SurveyRepository>(context),
-      )..add(LoadSurveyEvent()),
+      create: (context) => SurveyBloc()..add(GetSurveyListEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Kalahok'),
@@ -30,7 +27,7 @@ class SurveyScreen extends StatelessWidget {
             }
             if (state is SurveyErrorState) {
               // fix this ui later
-              return ErrorScreen(error: state.error);
+              return ErrorScreen(error: state.error.toString());
             }
             return Container();
           },

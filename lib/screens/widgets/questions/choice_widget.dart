@@ -4,8 +4,13 @@ import 'package:kalahok_mobile/utils.dart';
 
 class ChoiceWidget extends StatelessWidget {
   final Question question;
+  // final ValueChanged<Choice> onClickedChoice;
 
-  const ChoiceWidget({Key? key, required this.question}) : super(key: key);
+  const ChoiceWidget({
+    Key? key,
+    required this.question,
+    // required this.onClickedChoice,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +27,11 @@ class ChoiceWidget extends StatelessWidget {
 
   Widget _buildChoiceContainer(BuildContext context, Choice choice) {
     return GestureDetector(
+      // onTap: () => onClickedChoice(choice),
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.grey,
+          color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -50,7 +56,8 @@ class ChoiceWidget extends StatelessWidget {
           choice.name,
           style: const TextStyle(
             fontSize: 20,
-            color: Colors.white,
+            color: Colors.blueGrey,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ]),

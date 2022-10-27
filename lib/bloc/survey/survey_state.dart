@@ -1,28 +1,23 @@
 part of 'survey_bloc.dart';
 
 @immutable
-abstract class SurveyState extends Equatable {}
+abstract class SurveyState extends Equatable {
+  const SurveyState();
 
-//survey loading state
-class SurveyLoadingState extends SurveyState {
   @override
   List<Object> get props => [];
 }
 
-//survey loaded state
-class SurveyLoadedState extends SurveyState {
-  SurveyLoadedState(this.survey);
-  final Survey survey;
+class SurveyInitialState extends SurveyState {}
 
-  @override
-  List<Object> get props => [survey];
+class SurveyLoadingState extends SurveyState {}
+
+class SurveyLoadedState extends SurveyState {
+  final Survey survey;
+  const SurveyLoadedState(this.survey);
 }
 
-//survey error loading state
 class SurveyErrorState extends SurveyState {
-  SurveyErrorState(this.error);
-  final String error;
-
-  @override
-  List<Object> get props => [error];
+  final String? error;
+  const SurveyErrorState(this.error);
 }

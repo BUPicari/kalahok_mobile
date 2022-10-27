@@ -7,6 +7,7 @@ class WithChoicesQuestionWidget extends StatelessWidget {
   final String subText;
   final int itemCount;
   final int index;
+  // final ValueChanged<Choice> onClickedChoice;
 
   const WithChoicesQuestionWidget({
     Key? key,
@@ -14,6 +15,7 @@ class WithChoicesQuestionWidget extends StatelessWidget {
     required this.subText,
     required this.itemCount,
     required this.index,
+    // required this.onClickedChoice,
   }) : super(key: key);
 
   @override
@@ -30,7 +32,7 @@ class WithChoicesQuestionWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontSize: 20,
               fontStyle: FontStyle.italic,
-              color: Colors.indigo,
+              color: Colors.blueGrey,
             ),
           ),
           const SizedBox(height: 32),
@@ -47,6 +49,7 @@ class WithChoicesQuestionWidget extends StatelessWidget {
           Expanded(
             child: ChoiceWidget(
               question: question,
+              // onClickedChoice: (question) {},
             ),
           ),
         ],

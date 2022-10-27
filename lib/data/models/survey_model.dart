@@ -1,12 +1,13 @@
 class Survey {
-  int id;
-  String title;
-  int answeredCount;
-  String completionEstimatedTime;
-  bool status;
-  String addedAt;
-  String updatedAt;
-  List<Question> questionnaires;
+  int id = 0;
+  String title = "";
+  int answeredCount = 0;
+  String completionEstimatedTime = "";
+  bool status = false;
+  String addedAt = "";
+  String updatedAt = "";
+  List<Question> questionnaires = [];
+  String? error;
 
   Survey({
     required this.id,
@@ -18,6 +19,10 @@ class Survey {
     required this.updatedAt,
     required this.questionnaires,
   });
+
+  Survey.withError(String errorMessage) {
+    error = errorMessage;
+  }
 
   factory Survey.fromJson(Map<String, dynamic> json) {
     var questionnairesJson = json['questionnaires'] as List;
