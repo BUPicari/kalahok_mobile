@@ -1,6 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:kalahok_mobile/screens/survey_screen.dart';
+// import 'package:kalahok_mobile/screens/survey_screen.dart';
+import 'package:kalahok_mobile/try/page/home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         //   create: (context) => SurveyRepository(),
         //   child: const SurveyScreen(),
         // ),
-        nextScreen: const SurveyScreen(),
+        // nextScreen: const SurveyScreen(),
+        nextScreen: const HomePage(),
       ),
     );
   }
