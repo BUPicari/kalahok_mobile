@@ -35,7 +35,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
     return Scaffold(
       appBar: buildAppBar(context),
       body: QuestionsWidget(
-        questionnaires: widget.survey.questionnaires,
+        survey: widget.survey,
         controller: controller,
         onChangedPage: (index) => nextQuestion(index: index),
         onClickedChoice: selectChoice,

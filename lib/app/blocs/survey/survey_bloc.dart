@@ -21,5 +21,15 @@ class SurveyBloc extends Bloc<SurveyEvent, SurveyState> {
         emit(const SurveyErrorState("Failed to fetch data"));
       }
     });
+
+    on<SubmitSurveyResponseEvent>((event, emit) async {
+      try {
+        await _surveyRepository.postSubmitSurveyResponse(
+          survey: event.survey,
+        );
+      } on NetworkError {
+        emit(const SurveyErrorState("Failed to fetch data"));
+      }
+    });
   }
 }

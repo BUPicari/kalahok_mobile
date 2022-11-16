@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
+import 'package:kalahok_mobile/app/data/models/survey_model.dart';
 import 'package:kalahok_mobile/app/screens/survey_done_screen.dart';
 
 class SubmitButtonWidget extends StatelessWidget {
   final Question question;
-  final Question lastQuestion;
+  final Survey survey;
 
   const SubmitButtonWidget({
     Key? key,
     required this.question,
-    required this.lastQuestion,
+    required this.survey,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (lastQuestion == question) {
+    if (survey.questionnaires.last == question) {
       return Column(children: [
         const SizedBox(height: 17),
         SizedBox(
@@ -27,7 +28,7 @@ class SubmitButtonWidget extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SurveyDoneScreen(),
+                      builder: (context) => SurveyDoneScreen(survey: survey),
                     ),
                   );
                 },

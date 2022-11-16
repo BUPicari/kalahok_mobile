@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
+import 'package:kalahok_mobile/app/data/models/survey_model.dart';
 import 'package:kalahok_mobile/app/widgets/submit_button_widget.dart';
 
 class OpenEndedQuestionWidget extends StatelessWidget {
-  final List<Question> questionnaires;
+  final Survey survey;
   final Question question;
 
   const OpenEndedQuestionWidget({
     Key? key,
-    required this.questionnaires,
+    required this.survey,
     required this.question,
   }) : super(key: key);
 
@@ -33,7 +34,7 @@ class OpenEndedQuestionWidget extends StatelessWidget {
           ),
           SubmitButtonWidget(
             question: question,
-            lastQuestion: questionnaires.last,
+            survey: survey,
           ),
         ],
       ),

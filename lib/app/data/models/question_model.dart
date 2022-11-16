@@ -64,4 +64,18 @@ class Question {
       updatedAt: json['updated_at'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'question': question,
+      'type': type,
+      'choices': choices, // add toJson in Choice model
+      'rates': rates, // add toJson in Rate model
+      'config': config, // add toJson in Config model
+      'added_at': addedAt,
+      'updated_at': updatedAt,
+      'response': response,
+    };
+  }
 }

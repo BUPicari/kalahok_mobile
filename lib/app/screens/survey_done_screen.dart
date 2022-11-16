@@ -1,11 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kalahok_mobile/app/blocs/survey/survey_bloc.dart';
+import 'package:kalahok_mobile/app/data/models/survey_model.dart';
 import 'package:kalahok_mobile/app/screens/home_screen.dart';
 
 class SurveyDoneScreen extends StatelessWidget {
-  const SurveyDoneScreen({Key? key}) : super(key: key);
+  final Survey survey;
+
+  const SurveyDoneScreen({
+    Key? key,
+    required this.survey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          SurveyBloc()..add(SubmitSurveyResponseEvent(survey: survey)),
+      child: BlocBuilder<SurveyBloc, SurveyState>(
+        builder: (context, state) {
+          return buildDone(context);
+        },
+      ),
+    );
+  }
+
+  Widget buildDone(BuildContext context) {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(

@@ -13,3 +13,9 @@ class GetSurveyListEvent extends SurveyEvent {
 
   const GetSurveyListEvent({required this.categoryId});
 }
+
+class SubmitSurveyResponseEvent extends SurveyEvent {
+  final Survey survey;
+
+  const SubmitSurveyResponseEvent({required this.survey});
+}

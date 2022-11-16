@@ -1,4 +1,5 @@
 import 'question_model.dart';
+import 'survey_response_model.dart';
 
 class Survey {
   int id = 0;
@@ -13,6 +14,7 @@ class Survey {
   String addedAt = "";
   String updatedAt = "";
   List<Question> questionnaires = [];
+  List<SurveyResponse>? response = [];
 
   Survey({
     required this.id,
@@ -27,6 +29,7 @@ class Survey {
     required this.addedAt,
     required this.updatedAt,
     required this.questionnaires,
+    this.response,
   });
 
   factory Survey.fromJson(Map<String, dynamic> json) {
@@ -48,5 +51,25 @@ class Survey {
       updatedAt: json['updated_at'],
       questionnaires: questions,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    List<Map<String, dynamic>> questions =
+        questionnaires.map((e) => e.toJson()).toList();
+
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'answered_count': answeredCount,
+      'completion_estimated_time': completionEstimatedTime,
+      'status': status,
+      'multiple_submission': multipleSubmission,
+      'start_date': startDate,
+      'end_date': endDate,
+      'added_at': addedAt,
+      'updated_at': updatedAt,
+      'questionnaires': questions,
+    };
   }
 }

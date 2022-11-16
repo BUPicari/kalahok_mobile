@@ -7,6 +7,10 @@ class SurveyRepository {
   Future<Survey> getSurveyList({required int categoryId}) {
     return _provider.getSurveyList(categoryId: categoryId);
   }
+
+  Future<void> postSubmitSurveyResponse({required Survey survey}) {
+    return _provider.postSubmitSurveyResponse(survey: survey);
+  }
 }
 
 class NetworkError extends Error {}

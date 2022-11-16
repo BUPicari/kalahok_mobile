@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/data/models/choice_model.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
+import 'package:kalahok_mobile/app/data/models/survey_model.dart';
 import 'package:kalahok_mobile/app/widgets/questions/choice_widget.dart';
 import 'package:kalahok_mobile/app/widgets/submit_button_widget.dart';
 
 class WithChoicesQuestionWidget extends StatelessWidget {
-  final List<Question> questionnaires;
+  final Survey survey;
   final Question question;
   final String subText;
   final ValueChanged<Choice> onClickedChoice;
 
   const WithChoicesQuestionWidget({
     Key? key,
-    required this.questionnaires,
+    required this.survey,
     required this.question,
     required this.subText,
     required this.onClickedChoice,
@@ -44,7 +45,7 @@ class WithChoicesQuestionWidget extends StatelessWidget {
           ),
           SubmitButtonWidget(
             question: question,
-            lastQuestion: questionnaires.last,
+            survey: survey,
           ),
         ],
       ),
