@@ -39,6 +39,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
         controller: controller,
         onChangedPage: (index) => nextQuestion(index: index),
         onClickedChoice: selectChoice,
+        onClickedRate: selectRate,
+        onChanged: setResponse,
       ),
     );
   }
@@ -84,7 +86,20 @@ class _QuestionScreenState extends State<QuestionScreen> {
   void selectChoice(Choice choice) {
     setState(() {
       question.selectedChoice = choice;
-      question.response = choice.name;
+      setResponse(choice.name);
+    });
+  }
+
+  void selectRate(int rate) {
+    setState(() {
+      question.selectedRate = rate.toInt();
+      setResponse((rate + 1).toString());
+    });
+  }
+
+  void setResponse(String response) {
+    setState(() {
+      question.response = response;
     });
   }
 

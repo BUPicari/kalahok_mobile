@@ -24,9 +24,11 @@ class SurveyBloc extends Bloc<SurveyEvent, SurveyState> {
 
     on<SubmitSurveyResponseEvent>((event, emit) async {
       try {
-        await _surveyRepository.postSubmitSurveyResponse(
+        final responses = await _surveyRepository.postSubmitSurveyResponse(
           survey: event.survey,
         );
+        // emit(SurveySubmissionDoneState(responses));
+        print(responses);
       } on NetworkError {
         emit(const SurveyErrorState("Failed to fetch data"));
       }

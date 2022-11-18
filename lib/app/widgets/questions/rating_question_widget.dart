@@ -7,11 +7,13 @@ import 'package:kalahok_mobile/app/widgets/submit_button_widget.dart';
 class RatingQuestionWidget extends StatelessWidget {
   final Survey survey;
   final Question question;
+  final ValueChanged<int> onClickedRate;
 
   const RatingQuestionWidget({
     Key? key,
     required this.survey,
     required this.question,
+    required this.onClickedRate,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,10 @@ class RatingQuestionWidget extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           Expanded(
-            child: RateWidget(question: question),
+            child: RateWidget(
+              question: question,
+              onClickedRate: onClickedRate,
+            ),
           ),
           SubmitButtonWidget(
             question: question,

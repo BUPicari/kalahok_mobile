@@ -17,6 +17,11 @@ class SurveyLoadedState extends SurveyState {
   const SurveyLoadedState(this.survey);
 }
 
+class SurveySubmissionDoneState extends SurveyState {
+  final List<Map<String, dynamic>> responses;
+  const SurveySubmissionDoneState(this.responses);
+}
+
 class SurveyErrorState extends SurveyState {
   final String error;
   const SurveyErrorState(this.error);

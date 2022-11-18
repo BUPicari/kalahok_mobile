@@ -13,7 +13,9 @@ class SurveyProvider {
     return Survey.fromJson(jsonDecode(response.body));
   }
 
-  Future<void> postSubmitSurveyResponse({required Survey survey}) async {
+  Future<List<Map<String, dynamic>>> postSubmitSurveyResponse({
+    required Survey survey,
+  }) async {
     // var path = '/survey/responses';
 
     List<Questionnaires> questionnaires = survey.questionnaires
@@ -23,13 +25,11 @@ class SurveyProvider {
             ))
         .toList();
 
-    final responses = <Map<String, dynamic>>[
+    return <Map<String, dynamic>>[
       SurveyResponse(
         surveyId: 1,
         questionnaires: questionnaires,
       ).toJson(),
     ];
-
-    print(responses);
   }
 }

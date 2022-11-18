@@ -12,6 +12,8 @@ class QuestionsWidget extends StatelessWidget {
   final PageController controller;
   final ValueChanged<int> onChangedPage;
   final ValueChanged<Choice> onClickedChoice;
+  final ValueChanged<int> onClickedRate;
+  final ValueChanged<String> onChanged;
 
   const QuestionsWidget({
     Key? key,
@@ -19,6 +21,8 @@ class QuestionsWidget extends StatelessWidget {
     required this.controller,
     required this.onChangedPage,
     required this.onClickedChoice,
+    required this.onClickedRate,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -48,6 +52,7 @@ class QuestionsWidget extends StatelessWidget {
         return OpenEndedQuestionWidget(
           survey: survey,
           question: question,
+          onChanged: onChanged,
         );
       case "trueOrFalse":
         return WithChoicesQuestionWidget(
@@ -60,6 +65,7 @@ class QuestionsWidget extends StatelessWidget {
         return RatingQuestionWidget(
           survey: survey,
           question: question,
+          onClickedRate: onClickedRate,
         );
       default:
         return const UnknownQuestionWidget();

@@ -16,6 +16,7 @@ class Question {
   String addedAt = "";
   String updatedAt = "";
   Choice? selectedChoice;
+  int? selectedRate;
   String? response;
 
   Question({
@@ -28,12 +29,9 @@ class Question {
     required this.addedAt,
     required this.updatedAt,
     this.selectedChoice,
+    this.selectedRate,
     this.response,
   });
-
-  // Question.setResponse(String res) {
-  //   response = res;
-  // }
 
   factory Question.fromJson(Map<String, dynamic> json) {
     var choicesJson = json['choices'] as List;
