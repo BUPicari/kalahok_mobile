@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'choice_model.dart';
 import 'config_model.dart';
 import 'rate_model.dart';
@@ -17,6 +19,7 @@ class Question {
   String updatedAt = "";
   Choice? selectedChoice;
   int? selectedRate;
+  String? addedOthers;
   String? response;
 
   Question({
@@ -30,6 +33,7 @@ class Question {
     required this.updatedAt,
     this.selectedChoice,
     this.selectedRate,
+    this.addedOthers,
     this.response,
   });
 
@@ -43,8 +47,8 @@ class Question {
     var config = Config.fromJson(json['config']);
 
     if (json['type'] == "trueOrFalse") {
-      choices.add(Choice(name: 'True'));
-      choices.add(Choice(name: 'False'));
+      choices.add(Choice(name: config.useYesOrNo ? 'Yes' : 'True'));
+      choices.add(Choice(name: config.useYesOrNo ? 'No' : 'False'));
     }
 
     if (rates.isEmpty && json['type'] == "rating") {
@@ -75,5 +79,19 @@ class Question {
       'updated_at': updatedAt,
       'response': response,
     };
+  }
+
+  String getAnswer() {
+    if (config.canAddOthers) {
+      var selected = <String>[];
+      selected.add(response.toString());
+
+      return jsonEncode({
+        'selected': selected,
+        'others': addedOthers,
+      });
+    }
+
+    return "'$response'";
   }
 }

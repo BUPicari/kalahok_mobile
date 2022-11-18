@@ -19,9 +19,10 @@ class SurveyProvider {
     final headers = {"Content-type": "application/json"};
 
     List<Questionnaires> questionnaires = survey.questionnaires
-        .map((e) => Questionnaires(
-              questionnaireId: e.id,
-              answer: e.response.toString(),
+        .map((question) => Questionnaires(
+              questionnaireId: question.id,
+              // answer: question.response.toString(),
+              answer: question.getAnswer(),
             ))
         .toList();
 

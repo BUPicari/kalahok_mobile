@@ -10,6 +10,7 @@ class WithChoicesQuestionWidget extends StatelessWidget {
   final Question question;
   final String subText;
   final ValueChanged<Choice> onClickedChoice;
+  final ValueChanged<String> onAddOthers;
 
   const WithChoicesQuestionWidget({
     Key? key,
@@ -17,6 +18,7 @@ class WithChoicesQuestionWidget extends StatelessWidget {
     required this.question,
     required this.subText,
     required this.onClickedChoice,
+    required this.onAddOthers,
   }) : super(key: key);
 
   @override
@@ -41,6 +43,7 @@ class WithChoicesQuestionWidget extends StatelessWidget {
             child: ChoiceWidget(
               question: question,
               onClickedChoice: onClickedChoice,
+              onAddOthers: onAddOthers,
             ),
           ),
           SubmitButtonWidget(

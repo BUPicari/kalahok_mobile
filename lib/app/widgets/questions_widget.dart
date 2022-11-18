@@ -14,6 +14,7 @@ class QuestionsWidget extends StatelessWidget {
   final ValueChanged<Choice> onClickedChoice;
   final ValueChanged<int> onClickedRate;
   final ValueChanged<String> onChanged;
+  final ValueChanged<String> onAddOthers;
 
   const QuestionsWidget({
     Key? key,
@@ -23,6 +24,7 @@ class QuestionsWidget extends StatelessWidget {
     required this.onClickedChoice,
     required this.onClickedRate,
     required this.onChanged,
+    required this.onAddOthers,
   }) : super(key: key);
 
   @override
@@ -47,6 +49,7 @@ class QuestionsWidget extends StatelessWidget {
           question: question,
           subText: 'Please choose one choice from below',
           onClickedChoice: onClickedChoice,
+          onAddOthers: onAddOthers,
         );
       case "openEnded":
         return OpenEndedQuestionWidget(
@@ -60,6 +63,7 @@ class QuestionsWidget extends StatelessWidget {
           question: question,
           subText: 'Please choose True or False from below',
           onClickedChoice: onClickedChoice,
+          onAddOthers: onAddOthers,
         );
       case "rating":
         return RatingQuestionWidget(

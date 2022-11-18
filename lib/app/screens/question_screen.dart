@@ -41,6 +41,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         onClickedChoice: selectChoice,
         onClickedRate: selectRate,
         onChanged: setResponse,
+        onAddOthers: setAddedOthers,
       ),
     );
   }
@@ -97,9 +98,15 @@ class _QuestionScreenState extends State<QuestionScreen> {
     });
   }
 
+  void setAddedOthers(String others) {
+    setState(() {
+      question.addedOthers = others;
+    });
+  }
+
   void setResponse(String response) {
     setState(() {
-      question.response = "'$response'";
+      question.response = response;
     });
   }
 

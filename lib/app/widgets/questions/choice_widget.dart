@@ -6,11 +6,13 @@ import 'package:kalahok_mobile/app/helpers/utils.dart';
 class ChoiceWidget extends StatelessWidget {
   final Question question;
   final ValueChanged<Choice> onClickedChoice;
+  final ValueChanged<String> onAddOthers;
 
   const ChoiceWidget({
     Key? key,
     required this.question,
     required this.onClickedChoice,
+    required this.onAddOthers,
   }) : super(key: key);
 
   @override
@@ -18,15 +20,13 @@ class ChoiceWidget extends StatelessWidget {
     return ListView(
       physics: const BouncingScrollPhysics(),
       children: Utils.heightBetween(
-        question.choices
-            .map((choice) => _buildChoiceContainer(context, choice))
-            .toList(),
+        _buildListViewChildren(),
         height: 8,
       ),
     );
   }
 
-  Widget _buildChoiceContainer(BuildContext context, Choice choice) {
+  Widget _buildChoiceContainer(Choice choice) {
     final containerColor = getColorForChoice(choice, question);
 
     return GestureDetector(
@@ -43,6 +43,31 @@ class ChoiceWidget extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  List<Widget> _buildListViewChildren() {
+    var children = <Widget>[];
+
+    children = question.choices
+        .map((choice) => _buildChoiceContainer(choice))
+        .toList();
+
+    if (question.config.canAddOthers) {
+      children.add(_buildAddOthers());
+    }
+
+    return children;
+  }
+
+  Widget _buildAddOthers() {
+    return TextField(
+      onChanged: (value) => onAddOthers(value),
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: 'If others, plsss specify',
+      ),
+      style: const TextStyle(height: 2.0),
     );
   }
 
