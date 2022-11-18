@@ -8,8 +8,7 @@ class SurveyRepository {
     return _provider.getSurveyList(categoryId: categoryId);
   }
 
-  Future<List<Map<String, dynamic>>> postSubmitSurveyResponse(
-      {required Survey survey}) {
+  Future<void> postSubmitSurveyResponse({required Survey survey}) {
     return _provider.postSubmitSurveyResponse(survey: survey);
   }
 }

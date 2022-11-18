@@ -5,7 +5,6 @@ class Survey {
   int id = 0;
   String title = "";
   String description = "";
-  int answeredCount = 0;
   String completionEstimatedTime = "";
   bool status = false;
   bool multipleSubmission = false;
@@ -20,7 +19,6 @@ class Survey {
     required this.id,
     required this.title,
     required this.description,
-    required this.answeredCount,
     required this.completionEstimatedTime,
     required this.status,
     required this.multipleSubmission,
@@ -41,7 +39,6 @@ class Survey {
       id: json['id'],
       title: json['title'],
       description: json['description'],
-      answeredCount: json['answered_count'],
       completionEstimatedTime: json['completion_estimated_time'],
       status: json['status'],
       multipleSubmission: json['multipleSubmission'],
@@ -61,7 +58,6 @@ class Survey {
       'id': id,
       'title': title,
       'description': description,
-      'answered_count': answeredCount,
       'completion_estimated_time': completionEstimatedTime,
       'status': status,
       'multiple_submission': multipleSubmission,

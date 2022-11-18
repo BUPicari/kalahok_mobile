@@ -99,7 +99,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   void setResponse(String response) {
     setState(() {
-      question.response = response;
+      question.response = "'$response'";
     });
   }
 
