@@ -26,8 +26,24 @@ class ChoiceWidget extends StatelessWidget {
     );
   }
 
+  List<Widget> _buildListViewChildren() {
+    var children = <Widget>[];
+
+    children = question.choices
+        .map((choice) => _buildChoiceContainer(choice))
+        .toList();
+
+    if (question.config.canAddOthers) {
+      children.add(_buildAddOthers());
+    }
+
+    return children;
+  }
+
   Widget _buildChoiceContainer(Choice choice) {
-    final containerColor = getColorForChoice(choice, question);
+    final containerColor = question.config.multipleAnswer
+        ? getColorForChoices(choice)
+        : getColorForChoice(choice);
 
     return GestureDetector(
       onTap: () => onClickedChoice(choice),
@@ -43,31 +59,6 @@ class ChoiceWidget extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  List<Widget> _buildListViewChildren() {
-    var children = <Widget>[];
-
-    children = question.choices
-        .map((choice) => _buildChoiceContainer(choice))
-        .toList();
-
-    if (question.config.canAddOthers) {
-      children.add(_buildAddOthers());
-    }
-
-    return children;
-  }
-
-  Widget _buildAddOthers() {
-    return TextField(
-      onChanged: (value) => onAddOthers(value),
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'If others, plsss specify',
-      ),
-      style: const TextStyle(height: 2.0),
     );
   }
 
@@ -87,8 +78,29 @@ class ChoiceWidget extends StatelessWidget {
     );
   }
 
-  Color getColorForChoice(Choice choice, Question question) {
+  Widget _buildAddOthers() {
+    return TextField(
+      onChanged: (value) => onAddOthers(value),
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: 'If others, please specify',
+      ),
+      style: const TextStyle(height: 2.0),
+    );
+  }
+
+  Color getColorForChoice(Choice choice) {
     final isSelected = choice == question.selectedChoice;
+
+    if (!isSelected) {
+      return Colors.grey.shade200;
+    } else {
+      return Colors.orange;
+    }
+  }
+
+  Color getColorForChoices(Choice choice) {
+    final isSelected = question.selectedChoices?.contains(choice) ?? false;
 
     if (!isSelected) {
       return Colors.grey.shade200;

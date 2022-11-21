@@ -18,6 +18,7 @@ class Question {
   String addedAt = "";
   String updatedAt = "";
   Choice? selectedChoice;
+  List<Choice>? selectedChoices;
   int? selectedRate;
   String? addedOthers;
   String? response;
@@ -32,6 +33,7 @@ class Question {
     required this.addedAt,
     required this.updatedAt,
     this.selectedChoice,
+    this.selectedChoices,
     this.selectedRate,
     this.addedOthers,
     this.response,
@@ -82,8 +84,18 @@ class Question {
   }
 
   String getAnswer() {
+    var selected = <String>[];
+
+    if (config.multipleAnswer) {
+      selected = response.toString().split(',');
+
+      return jsonEncode({
+        'selected': selected,
+        'others': addedOthers,
+      });
+    }
+
     if (config.canAddOthers) {
-      var selected = <String>[];
       selected.add(response.toString());
 
       return jsonEncode({

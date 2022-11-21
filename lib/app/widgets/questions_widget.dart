@@ -44,10 +44,14 @@ class QuestionsWidget extends StatelessWidget {
   Widget buildQuestion({required Question question}) {
     switch (question.type) {
       case "multipleChoice":
+        var subText = 'Please choose one choice from below';
+        if (question.config.multipleAnswer) {
+          subText = 'Please select choices from below';
+        }
         return WithChoicesQuestionWidget(
           survey: survey,
           question: question,
-          subText: 'Please choose one choice from below',
+          subText: subText,
           onClickedChoice: onClickedChoice,
           onAddOthers: onAddOthers,
         );
@@ -58,10 +62,14 @@ class QuestionsWidget extends StatelessWidget {
           onChanged: onChanged,
         );
       case "trueOrFalse":
+        var subText = 'Please choose True or False from below';
+        if (question.config.useYesOrNo) {
+          subText = 'Please choose Yes or No from below';
+        }
         return WithChoicesQuestionWidget(
           survey: survey,
           question: question,
-          subText: 'Please choose True or False from below',
+          subText: subText,
           onClickedChoice: onClickedChoice,
           onAddOthers: onAddOthers,
         );

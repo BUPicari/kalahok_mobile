@@ -21,6 +21,7 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   late PageController controller;
   late Question question;
+  late List<Choice> selected;
 
   @override
   void initState() {
@@ -28,6 +29,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
     controller = PageController();
     question = widget.survey.questionnaires.first;
+    selected = [];
   }
 
   @override
@@ -39,6 +41,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         controller: controller,
         onChangedPage: (index) => nextQuestion(index: index),
         onClickedChoice: selectChoice,
+        // onSelectChoices: selectMultipleChoices,
         onClickedRate: selectRate,
         onChanged: setResponse,
         onAddOthers: setAddedOthers,
@@ -86,8 +89,23 @@ class _QuestionScreenState extends State<QuestionScreen> {
 
   void selectChoice(Choice choice) {
     setState(() {
-      question.selectedChoice = choice;
-      setResponse(choice.name);
+      if (question.config.multipleAnswer) {
+        if (selected.contains(choice)) {
+          selected.remove(choice);
+        } else {
+          selected.add(choice);
+        }
+        question.selectedChoices = selected;
+
+        if (question.response == null) {
+          setResponse(choice.name);
+        } else {
+          setResponse("${question.response},${choice.name}");
+        }
+      } else {
+        question.selectedChoice = choice;
+        setResponse(choice.name);
+      }
     });
   }
 
