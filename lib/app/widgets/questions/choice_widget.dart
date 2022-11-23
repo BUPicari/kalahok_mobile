@@ -65,16 +65,21 @@ class ChoiceWidget extends StatelessWidget {
   Widget _buildChoice(Choice choice) {
     return SizedBox(
       height: 50,
-      child: Row(children: [
-        Text(
-          choice.name,
-          style: const TextStyle(
-            fontSize: 20,
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Flexible(
+            child: Text(
+              choice.name,
+              style: const TextStyle(
+                fontSize: 20,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 

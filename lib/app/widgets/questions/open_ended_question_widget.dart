@@ -34,6 +34,8 @@ class OpenEndedQuestionWidget extends StatelessWidget {
               border: OutlineInputBorder(),
               hintText: 'Enter your answer',
             ),
+            maxLines: null,
+            keyboardType: TextInputType.multiline,
             style: const TextStyle(height: 2.0),
           ),
           SubmitButtonWidget(
