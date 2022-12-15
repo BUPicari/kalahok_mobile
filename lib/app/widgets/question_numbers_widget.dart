@@ -34,7 +34,10 @@ class QuestionNumbersWidget extends StatelessWidget {
   }
 
   Widget buildNumber({required int index, required bool isSelected}) {
-    final color = isSelected ? Colors.orange : Colors.white;
+    final color = generateColor(
+      question: questions[index],
+      isSelected: isSelected,
+    );
 
     return GestureDetector(
       onTap: () => onClickedNumber(index),
@@ -50,5 +53,22 @@ class QuestionNumbersWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Color generateColor({
+    required Question question,
+    required bool isSelected,
+  }) {
+    var color = Colors.white;
+
+    if (question.response != null) {
+      color = Colors.green;
+    }
+
+    if (isSelected) {
+      color = Colors.orange;
+    }
+
+    return color;
   }
 }

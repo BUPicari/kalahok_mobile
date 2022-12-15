@@ -84,11 +84,15 @@ class ChoiceWidget extends StatelessWidget {
   }
 
   Widget _buildAddOthers() {
+    String subText = question.type == 'trueOrFalse'
+        ? 'If Yes/No or True/False, please specify'
+        : 'If others, please specify';
+
     return TextField(
       onChanged: (value) => onAddOthers(value),
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'If others, please specify',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        hintText: subText,
       ),
       style: const TextStyle(height: 2.0),
     );

@@ -22,10 +22,27 @@ class RateWidget extends StatelessWidget {
       );
     });
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: stars,
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: stars,
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: question.labels.map((label) {
+            return Text(
+              label.name,
+              style: const TextStyle(
+                fontStyle: FontStyle.italic,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            );
+          }).toList(),
+        ),
+      ],
     );
   }
 

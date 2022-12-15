@@ -42,93 +42,91 @@ class SurveyScreen extends StatelessWidget {
   }
 
   Widget buildContent({context, required Survey survey}) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(children: [
+    return Container(
+      padding: const EdgeInsets.all(30),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.blueGrey, Colors.indigo],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+        ),
+      ),
+      child: Center(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Expanded(
-            flex: 2,
-            child: SizedBox(
-              child: Column(children: [
-                const SizedBox(height: 45),
-                const Text(
-                  ' Hi, Welcome to',
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: Colors.blueGrey,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  survey.title,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.blue,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Read each questions thoroughly, submit once done with the survey.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.blueGrey,
-                  ),
-                ),
-              ]),
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Stack(children: [
-              Positioned(
-                child: Image.asset(
-                  'assets/images/survey-welcome.png',
-                  height: 280,
+            child: Column(children: [
+              const SizedBox(height: 45),
+              const Text(
+                ' Hi, Welcome to',
+                style: TextStyle(
+                  fontSize: 23,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Positioned(
-                bottom: 40,
-                left: 0,
-                right: 0,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: SizedBox(
-                    height: 50,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                QuestionScreen(survey: survey),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(33),
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text(
-                            'GET STARTED',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+              const SizedBox(height: 10),
+              Text(
+                survey.title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.orange,
+                  fontStyle: FontStyle.italic,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 10),
+              const Text(
+                'Read each questions thoroughly, submit once done with the survey.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
                 ),
               ),
             ]),
+          ),
+          SizedBox(
+            child: Image.asset(
+              'assets/images/survey-welcome.png',
+              height: 280,
+            ),
+          ),
+          const SizedBox(height: 80),
+          SizedBox(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 100),
+              child: SizedBox(
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => QuestionScreen(survey: survey),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(33),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Text(
+                        'GET STARTED',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
         ]),
       ),

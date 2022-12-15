@@ -24,9 +24,24 @@ class SurveyBloc extends Bloc<SurveyEvent, SurveyState> {
 
     on<SubmitSurveyResponseEvent>((event, emit) async {
       try {
-        await _surveyRepository.postSubmitSurveyResponse(
-          survey: event.survey,
-        );
+        int numOfRequiredResponses = 0;
+
+        for (var question in event.survey.questionnaires) {
+          if (question.config.isRequired) {
+            if (question.response != null && question.response != "") {
+              numOfRequiredResponses = numOfRequiredResponses + 1;
+            }
+          }
+        }
+
+        if (event.survey.numOfRequired != numOfRequiredResponses) {
+          emit(SurveyForReviewState());
+        } else {
+          emit(SurveyDoneState());
+          await _surveyRepository.postSubmitSurveyResponse(
+            survey: event.survey,
+          );
+        }
       } on NetworkError {
         emit(const SurveyErrorState("Failed to fetch data"));
       }

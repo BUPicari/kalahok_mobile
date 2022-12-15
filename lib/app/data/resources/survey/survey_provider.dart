@@ -10,7 +10,16 @@ class SurveyProvider {
     var url = Uri.parse(ApiConfig.baseUrl + path);
     http.Response response = await http.get(url);
 
-    return Survey.fromJson(jsonDecode(response.body));
+    var result = Survey.fromJson(jsonDecode(response.body));
+
+    for (var question in result.questionnaires) {
+      if (question.config.isRequired) {
+        var num = result.numOfRequired?.toInt() ?? 0;
+        result.numOfRequired = num + 1;
+      }
+    }
+
+    return result;
   }
 
   Future<void> postSubmitSurveyResponse({required Survey survey}) async {
@@ -21,27 +30,26 @@ class SurveyProvider {
     List<Questionnaires> questionnaires = survey.questionnaires
         .map((question) => Questionnaires(
               questionnaireId: question.id,
-              // answer: question.response.toString(),
               answer: question.getAnswer(),
             ))
         .toList();
 
     var surveyResponse = <Map<String, dynamic>>[
       SurveyResponse(
-        surveyId: 1,
+        surveyId: survey.id,
         questionnaires: questionnaires,
       ).toJson(),
     ];
 
     print(surveyResponse);
 
-    http.Response response = await http.post(
-      url,
-      headers: headers,
-      body: json.encode(surveyResponse),
-    );
-
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    // http.Response response = await http.post(
+    //   url,
+    //   headers: headers,
+    //   body: json.encode(surveyResponse),
+    // );
+    //
+    // print('Response status: ${response.statusCode}');
+    // print('Response body: ${response.body}');
   }
 }

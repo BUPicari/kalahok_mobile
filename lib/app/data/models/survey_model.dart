@@ -14,6 +14,7 @@ class Survey {
   String updatedAt = "";
   List<Question> questionnaires = [];
   List<SurveyResponse>? response = [];
+  int? numOfRequired = 0;
 
   Survey({
     required this.id,
@@ -28,6 +29,7 @@ class Survey {
     required this.updatedAt,
     required this.questionnaires,
     this.response,
+    this.numOfRequired,
   });
 
   factory Survey.fromJson(Map<String, dynamic> json) {

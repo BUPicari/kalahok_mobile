@@ -1,23 +1,23 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:kalahok_mobile/app/data/models/label_model.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
 import 'package:kalahok_mobile/app/data/models/survey_model.dart';
 import 'package:kalahok_mobile/app/widgets/PreviousNextButtonWidget.dart';
 import 'package:kalahok_mobile/app/widgets/question_text_widget.dart';
 import 'package:kalahok_mobile/app/widgets/review_button_widget.dart';
 
-class OpenEndedQuestionWidget extends StatelessWidget {
+class DropdownQuestionWidget extends StatelessWidget {
   final int index;
-  // final TextEditingController textController;
   final Survey survey;
   final Question question;
   final ValueChanged<String> onChanged;
   final ValueChanged<int> onPressedPrev;
   final ValueChanged<int> onPressedNext;
 
-  const OpenEndedQuestionWidget({
+  const DropdownQuestionWidget({
     Key? key,
     required this.index,
-    // required this.textController,
     required this.survey,
     required this.question,
     required this.onChanged,
@@ -39,7 +39,7 @@ class OpenEndedQuestionWidget extends StatelessWidget {
           ),
           const SizedBox(height: 32),
           Expanded(
-            child: Column(children: buildTextFieldForms()),
+            child: buildDropdownForms(),
           ),
           PreviousNextButtonWidget(
             index: index,
@@ -57,29 +57,41 @@ class OpenEndedQuestionWidget extends StatelessWidget {
     );
   }
 
-  List<Widget> buildTextFieldForms() {
-    List<Widget> textFields = question.labels
-        .map(
-          (label) => Column(children: [
-            TextField(
-              // controller: textController,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                hintText: label.name,
-              ),
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              style: const TextStyle(height: 2.0),
-              onChanged: (value) {
-                onChanged('${question.labels.indexOf(label)}, $value');
-                // textController.text = value;
-              },
+  Widget buildDropdownForms() {
+    return ListView(
+      children: question.labels
+          .map(
+            (label) => Column(
+              children: [
+                DropdownSearch<String>(
+                  popupProps: const PopupProps.menu(
+                    showSelectedItems: true,
+                    showSearchBox: true,
+                  ),
+                  items: const [
+                    // {"name": "Abra", "id": 1401},
+                    // {"name": "Agusan Del Norte", "id": 1602},
+                    // {"name": "Agusan Del Sur", "id": 1603},
+                    // {"name": "Aklan", "id": 604},
+                    "Brazil",
+                    "Italia",
+                    "Tunisia",
+                    'Canada',
+                  ],
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    dropdownSearchDecoration: InputDecoration(
+                      labelText: label.name,
+                      hintText: 'Select a ${label.name}',
+                    ),
+                  ),
+                  onChanged: print,
+                  // selectedItem: "Brazil",
+                ),
+                const SizedBox(height: 10),
+              ],
             ),
-            const SizedBox(height: 10),
-          ]),
-        )
-        .toList();
-
-    return textFields;
+          )
+          .toList(),
+    );
   }
 }
