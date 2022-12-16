@@ -42,6 +42,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
+      resizeToAvoidBottomInset: false,
       body: QuestionsWidget(
         survey: widget.survey,
         pageController: pageController,
