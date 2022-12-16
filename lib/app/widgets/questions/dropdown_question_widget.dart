@@ -1,13 +1,16 @@
+import 'dart:convert';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:kalahok_mobile/app/data/models/label_model.dart';
+import 'package:http/http.dart' as http;
+import 'package:kalahok_mobile/app/configs/api_config.dart';
+import 'package:kalahok_mobile/app/data/models/dropdown_model.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
 import 'package:kalahok_mobile/app/data/models/survey_model.dart';
 import 'package:kalahok_mobile/app/widgets/PreviousNextButtonWidget.dart';
 import 'package:kalahok_mobile/app/widgets/question_text_widget.dart';
 import 'package:kalahok_mobile/app/widgets/review_button_widget.dart';
 
-class DropdownQuestionWidget extends StatelessWidget {
+class DropdownQuestionWidget extends StatefulWidget {
   final int index;
   final Survey survey;
   final Question question;
@@ -26,6 +29,20 @@ class DropdownQuestionWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<DropdownQuestionWidget> createState() => _DropdownQuestionWidgetState();
+}
+
+class _DropdownQuestionWidgetState extends State<DropdownQuestionWidget> {
+  late int tempId;
+
+  @override
+  void initState() {
+    super.initState();
+
+    tempId = 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -34,23 +51,23 @@ class DropdownQuestionWidget extends StatelessWidget {
         children: [
           const SizedBox(height: 15),
           QuestionTextWidget(
-            isRequired: question.config.isRequired,
-            question: question.question,
+            isRequired: widget.question.config.isRequired,
+            question: widget.question.question,
           ),
           const SizedBox(height: 32),
           Expanded(
             child: buildDropdownForms(),
           ),
           PreviousNextButtonWidget(
-            index: index,
-            question: question,
-            survey: survey,
-            onPressedPrev: onPressedPrev,
-            onPressedNext: onPressedNext,
+            index: widget.index,
+            question: widget.question,
+            survey: widget.survey,
+            onPressedPrev: widget.onPressedPrev,
+            onPressedNext: widget.onPressedNext,
           ),
           ReviewButtonWidget(
-            question: question,
-            survey: survey,
+            question: widget.question,
+            survey: widget.survey,
           ),
         ],
       ),
@@ -59,32 +76,37 @@ class DropdownQuestionWidget extends StatelessWidget {
 
   Widget buildDropdownForms() {
     return ListView(
-      children: question.labels
+      children: widget.question.labels
           .map(
             (label) => Column(
               children: [
-                DropdownSearch<String>(
+                DropdownSearch<Dropdown>(
                   popupProps: const PopupProps.menu(
-                    showSelectedItems: true,
                     showSearchBox: true,
                   ),
-                  items: const [
-                    // {"name": "Abra", "id": 1401},
-                    // {"name": "Agusan Del Norte", "id": 1602},
-                    // {"name": "Agusan Del Sur", "id": 1603},
-                    // {"name": "Aklan", "id": 604},
-                    "Brazil",
-                    "Italia",
-                    "Tunisia",
-                    'Canada',
-                  ],
                   dropdownDecoratorProps: DropDownDecoratorProps(
                     dropdownSearchDecoration: InputDecoration(
                       labelText: label.name,
                       hintText: 'Select a ${label.name}',
                     ),
                   ),
-                  onChanged: print,
+                  asyncItems: (String filter) async {
+                    var path = widget.question.labels.indexOf(label) == 0
+                        ? "/${label.endpoint}"
+                        : "/${label.endpoint}?q=$tempId";
+                    var url = Uri.parse(ApiConfig.baseUrl + path);
+                    http.Response response = await http.get(url);
+                    var dropdownJson = jsonDecode(response.body) as List;
+                    return dropdownJson
+                        .map((e) => Dropdown.fromJson(e))
+                        .toList();
+                  },
+                  itemAsString: (Dropdown data) => data.name,
+                  onChanged: (Dropdown? data) {
+                    tempId = data?.id.toInt() ?? 0;
+                    widget.onChanged(
+                        '${widget.question.labels.indexOf(label)}, ${data?.name.toString()}');
+                  },
                   // selectedItem: "Brazil",
                 ),
                 const SizedBox(height: 10),

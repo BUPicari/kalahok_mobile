@@ -122,11 +122,15 @@ class Question {
     var arrResponses = <String>[];
     String answer = response.toString();
 
-    if (config.multipleAnswer || config.canAddOthers || type == 'openEnded') {
+    if (config.multipleAnswer ||
+        config.canAddOthers ||
+        type == 'openEnded' ||
+        type == 'dropdown') {
       if (config.multipleAnswer) {
-        arrResponses = answer.split(',');
+        arrResponses = answer != 'null' ? answer.split(',') : arrResponses;
       } else if (config.canAddOthers) {
-        arrResponses.add(answer);
+        var decoded = jsonDecode(answer);
+        decoded != null ? arrResponses.add(answer) : arrResponses;
       } else {
         var decoded = jsonDecode(answer);
         arrResponses =
@@ -189,7 +193,9 @@ class Question {
     }
 
     return Text(
-      answer != 'null' ? 'Answer:  ${answer.replaceAll('"', '')}' : '',
+      jsonDecode(answer) != null
+          ? 'Answer:  ${answer.replaceAll('"', '')}'
+          : '',
       style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
     );
   }

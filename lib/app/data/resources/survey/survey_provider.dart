@@ -43,13 +43,13 @@ class SurveyProvider {
 
     print(surveyResponse);
 
-    // http.Response response = await http.post(
-    //   url,
-    //   headers: headers,
-    //   body: json.encode(surveyResponse),
-    // );
-    //
-    // print('Response status: ${response.statusCode}');
-    // print('Response body: ${response.body}');
+    http.Response response = await http.post(
+      url,
+      headers: headers,
+      body: json.encode(surveyResponse),
+    );
+
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
   }
 }

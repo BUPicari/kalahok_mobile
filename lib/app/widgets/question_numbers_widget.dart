@@ -61,7 +61,7 @@ class QuestionNumbersWidget extends StatelessWidget {
   }) {
     var color = Colors.white;
 
-    if (question.response != null) {
+    if (question.response != null || question.addedOthers != null) {
       color = Colors.green;
     }
 

@@ -28,11 +28,15 @@ class SurveyBloc extends Bloc<SurveyEvent, SurveyState> {
 
         for (var question in event.survey.questionnaires) {
           if (question.config.isRequired) {
-            if (question.response != null && question.response != "") {
+            if ((question.response != null && question.response != "") ||
+                (question.addedOthers != null && question.addedOthers != "")) {
               numOfRequiredResponses = numOfRequiredResponses + 1;
             }
           }
         }
+
+        print('numOfRequired: ${event.survey.numOfRequired}');
+        print('numOfRequiredResponses: $numOfRequiredResponses');
 
         if (event.survey.numOfRequired != numOfRequiredResponses) {
           emit(SurveyForReviewState());

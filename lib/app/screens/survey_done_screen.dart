@@ -52,7 +52,7 @@ class SurveyDoneScreen extends StatelessWidget {
                 child: SvgPicture.asset(
                   'assets/images/survey-required.svg',
                   semanticsLabel: 'Survey required',
-                  height: 280,
+                  height: 260,
                 ),
               ),
               const SizedBox(height: 40),

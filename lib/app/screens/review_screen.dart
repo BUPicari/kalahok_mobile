@@ -129,9 +129,11 @@ class ReviewScreen extends StatelessWidget {
   Color getColorForBox(Question question) {
     Color boxColor = Colors.grey;
 
-    if (question.config.isRequired && question.response == null) {
+    if (question.config.isRequired &&
+        question.response == null &&
+        question.addedOthers == null) {
       boxColor = const Color(0xfff8d7da);
-    } else if (question.response != null) {
+    } else if (question.response != null || question.addedOthers != null) {
       boxColor = const Color(0xffd4edda);
     }
 
