@@ -1,22 +1,24 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/configs/api_config.dart';
-import 'package:kalahok_mobile/app/data/models/category_model.dart';
-import 'package:kalahok_mobile/app/screens/category_survey_screen.dart';
+import 'package:kalahok_mobile/app/data/models/surveys_model.dart';
+import 'package:kalahok_mobile/app/screens/waiver_screen.dart';
 
-class CategoryWidget extends StatelessWidget {
-  final Category category;
+class CategorySurveyWidget extends StatelessWidget {
+  final Surveys survey;
+  final String image;
 
-  const CategoryWidget({
+  const CategorySurveyWidget({
     Key? key,
-    required this.category,
+    required this.survey,
+    required this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => CategorySurveyScreen(category: category),
+        builder: (context) => WaiverScreen(survey: survey),
       )),
       child: Container(
         padding: const EdgeInsets.all(12),
@@ -28,12 +30,12 @@ class CategoryWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.network(
-              ApiConfig.baseUrl + category.image,
+              ApiConfig.baseUrl + image,
               width: 70,
             ),
             const SizedBox(height: 10),
             Text(
-              category.name,
+              survey.title,
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

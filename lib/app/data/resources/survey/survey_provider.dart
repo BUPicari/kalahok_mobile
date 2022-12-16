@@ -5,8 +5,8 @@ import 'package:kalahok_mobile/app/data/models/survey_model.dart';
 import 'package:kalahok_mobile/app/data/models/survey_response_model.dart';
 
 class SurveyProvider {
-  Future<Survey> getSurveyList({required int categoryId}) async {
-    var path = '/surveys/current-active?category=$categoryId&format-date=true';
+  Future<Survey> getSurveyList({required int surveyId}) async {
+    var path = '/surveys/fetch/$surveyId';
     var url = Uri.parse(ApiConfig.baseUrl + path);
     http.Response response = await http.get(url);
 

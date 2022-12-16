@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalahok_mobile/app/blocs/category/category_bloc.dart';
-import 'package:kalahok_mobile/app/configs/app_config.dart';
 import 'package:kalahok_mobile/app/data/models/category_model.dart';
+import 'package:kalahok_mobile/app/data/models/category_survey_model.dart';
 import 'package:kalahok_mobile/app/screens/error_screen.dart';
-import 'package:kalahok_mobile/app/widgets/category_widget.dart';
+import 'package:kalahok_mobile/app/screens/home_screen.dart';
+import 'package:kalahok_mobile/app/widgets/category_survey_widget.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class CategorySurveyScreen extends StatelessWidget {
+  final Category category;
+
+  const CategorySurveyScreen({
+    Key? key,
+    required this.category,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CategoryBloc()..add(GetCategoryListEvent()),
+      create: (context) => CategoryBloc()
+        ..add(GetCategorySurveyListEvent(categoryId: category.id)),
       child: Scaffold(
         appBar: AppBar(
-          leading: Image.asset(AppConfig.logo),
-          title: Text(AppConfig.name),
+          leading: GestureDetector(
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const HomeScreen(),
+            )),
+          ),
+          title: Text(category.name),
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(80),
             child: Container(
@@ -37,18 +52,18 @@ class HomeScreen extends StatelessWidget {
         ),
         body: BlocBuilder<CategoryBloc, CategoryState>(
           builder: (context, state) {
-            if (state is CategoryLoadingState) {
+            if (state is CategorySurveyLoadingState) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
-            if (state is CategoryLoadedState) {
+            if (state is CategorySurveyLoadedState) {
               return ListView(
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.all(16),
                 children: [
                   const SizedBox(height: 8),
-                  buildCategories(categories: state.categories),
+                  buildCategorySurveys(categorySurvey: state.categorySurvey),
                 ],
               );
             }
@@ -68,11 +83,11 @@ class HomeScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: const [
         Text(
-          'Hello please',
+          'Active',
           style: TextStyle(fontSize: 16, color: Colors.white),
         ),
         Text(
-          'Choose a category',
+          'Surveys',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -83,7 +98,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildCategories({required List<Category> categories}) {
+  Widget buildCategorySurveys({required CategorySurvey categorySurvey}) {
     return SizedBox(
       height: 500,
       child: GridView(
@@ -94,8 +109,11 @@ class HomeScreen extends StatelessWidget {
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
-        children: categories
-            .map((category) => CategoryWidget(category: category))
+        children: categorySurvey.survey
+            .map((survey) => CategorySurveyWidget(
+                  survey: survey,
+                  image: categorySurvey.image,
+                ))
             .toList(),
       ),
     );
