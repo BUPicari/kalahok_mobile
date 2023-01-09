@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalahok_mobile/app/blocs/category/category_bloc.dart';
 import 'package:kalahok_mobile/app/configs/app_config.dart';
 import 'package:kalahok_mobile/app/data/models/category_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 import 'package:kalahok_mobile/app/screens/error_screen.dart';
 import 'package:kalahok_mobile/app/widgets/category_widget.dart';
 
@@ -26,9 +27,9 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           flexibleSpace: Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.blueGrey, Colors.indigo],
+                colors: AppColor.linearGradient,
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
               ),
@@ -66,17 +67,17 @@ class HomeScreen extends StatelessWidget {
   Widget buildWelcome() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
+      children: [
         Text(
           'Hello please',
-          style: TextStyle(fontSize: 16, color: Colors.white),
+          style: TextStyle(fontSize: 16, color: AppColor.subPrimary),
         ),
         Text(
           'Choose a category',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: AppColor.subPrimary,
           ),
         ),
       ],

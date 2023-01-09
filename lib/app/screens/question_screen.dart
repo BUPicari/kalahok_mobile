@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:kalahok_mobile/app/data/models/choice_model.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
 import 'package:kalahok_mobile/app/data/models/survey_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 import 'package:kalahok_mobile/app/screens/home_screen.dart';
 import 'package:kalahok_mobile/app/widgets/question_numbers_widget.dart';
 import 'package:kalahok_mobile/app/widgets/questions_widget.dart';
@@ -63,18 +64,18 @@ class _QuestionScreenState extends State<QuestionScreen> {
     return AppBar(
       title: Text(widget.survey.title),
       flexibleSpace: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blueGrey, Colors.indigo],
+            colors: AppColor.linearGradient,
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),
         ),
       ),
       leading: GestureDetector(
-        child: const Icon(
+        child: Icon(
           Icons.arrow_back,
-          color: Colors.white,
+          color: AppColor.subPrimary,
         ),
         onTap: () => Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const HomeScreen(),

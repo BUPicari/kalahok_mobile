@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/configs/api_config.dart';
 import 'package:kalahok_mobile/app/data/models/surveys_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 import 'package:kalahok_mobile/app/screens/waiver_screen.dart';
 
 class CategorySurveyWidget extends StatelessWidget {
@@ -36,8 +37,8 @@ class CategorySurveyWidget extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               survey.title,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: AppColor.subPrimary,
                 fontWeight: FontWeight.bold,
                 fontSize: 12,
               ),

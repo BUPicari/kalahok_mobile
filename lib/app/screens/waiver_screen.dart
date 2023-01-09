@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/data/models/surveys_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 import 'package:kalahok_mobile/app/screens/survey_screen.dart';
 
 class WaiverScreen extends StatelessWidget {
@@ -15,9 +16,9 @@ class WaiverScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(30),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blueGrey, Colors.indigo],
+            colors: AppColor.linearGradient,
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),
@@ -40,9 +41,9 @@ class WaiverScreen extends StatelessWidget {
                     SizedBox(
                       child: Text(
                         survey.description,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: AppColor.subPrimary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -66,18 +67,18 @@ class WaiverScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: AppColor.subPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(33),
                         ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             'I AGREE',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: AppColor.subSecondary,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),

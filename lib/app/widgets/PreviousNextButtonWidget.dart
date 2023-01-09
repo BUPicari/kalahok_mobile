@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
 import 'package:kalahok_mobile/app/data/models/survey_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 
 class PreviousNextButtonWidget extends StatelessWidget {
   final int index;
@@ -37,7 +38,7 @@ class PreviousNextButtonWidget extends StatelessWidget {
 
   Widget buildPrevBtn() {
     bool condition = question == survey.questionnaires.first;
-    var color = condition ? Colors.blueGrey : Colors.indigo;
+    var color = condition ? AppColor.secondary : AppColor.primary;
 
     return Expanded(
       child: ElevatedButton(
@@ -48,10 +49,10 @@ class PreviousNextButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(33),
           ),
         ),
-        child: const Text(
+        child: Text(
           'Prev',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColor.subPrimary,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
@@ -62,7 +63,7 @@ class PreviousNextButtonWidget extends StatelessWidget {
 
   Widget buildNextBtn() {
     bool condition = question == survey.questionnaires.last;
-    var color = condition ? Colors.blueGrey : Colors.indigo;
+    var color = condition ? AppColor.secondary : AppColor.primary;
 
     return Expanded(
       child: ElevatedButton(
@@ -73,10 +74,10 @@ class PreviousNextButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(33),
           ),
         ),
-        child: const Text(
+        child: Text(
           'Next',
           style: TextStyle(
-            color: Colors.white,
+            color: AppColor.subPrimary,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),

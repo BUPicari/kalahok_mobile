@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 
 class QuestionTextWidget extends StatelessWidget {
   final bool isRequired;
@@ -16,18 +17,19 @@ class QuestionTextWidget extends StatelessWidget {
       return RichText(
         text: TextSpan(
           text: question,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24,
-            color: Colors.black,
+            color: AppColor.subSecondary,
           ),
-          children: const <TextSpan>[
+          children: <TextSpan>[
             TextSpan(
               text: ' *',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
-                color: Colors.red,
+                // color: Colors.red,
+                color: AppColor.error,
               ),
             ),
           ],

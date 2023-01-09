@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 
 class RateWidget extends StatelessWidget {
   final Question question;
@@ -59,9 +60,9 @@ class RateWidget extends StatelessWidget {
     final isSelected = rate <= selectedRate;
 
     if (!isSelected) {
-      return Colors.blueGrey;
+      return AppColor.secondary;
     } else {
-      return Colors.orange;
+      return AppColor.warning;
     }
   }
 }

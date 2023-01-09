@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/data/models/survey_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 import 'package:kalahok_mobile/app/screens/survey_done_screen.dart';
 
 class SubmitButtonWidget extends StatelessWidget {
@@ -33,18 +34,17 @@ class SubmitButtonWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(33),
                 ),
               ),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      'SUBMIT',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ]),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(
+                  'SUBMIT',
+                  style: TextStyle(
+                    color: AppColor.subPrimary,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ]),
             ),
           ),
         ),

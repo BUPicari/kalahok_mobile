@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kalahok_mobile/app/data/models/question_model.dart';
 import 'package:kalahok_mobile/app/data/models/choice_model.dart';
 import 'package:kalahok_mobile/app/helpers/utils.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 
 class ChoiceWidget extends StatelessWidget {
   final Question question;
@@ -71,9 +72,9 @@ class ChoiceWidget extends StatelessWidget {
           Flexible(
             child: Text(
               choice.name,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
-                color: Colors.black,
+                color: AppColor.subSecondary,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -102,9 +103,9 @@ class ChoiceWidget extends StatelessWidget {
     final isSelected = choice == question.selectedChoice;
 
     if (!isSelected) {
-      return Colors.grey.shade200;
+      return AppColor.subPrimary;
     } else {
-      return Colors.orange;
+      return AppColor.warning;
     }
   }
 
@@ -112,9 +113,9 @@ class ChoiceWidget extends StatelessWidget {
     final isSelected = question.selectedChoices?.contains(choice) ?? false;
 
     if (!isSelected) {
-      return Colors.grey.shade200;
+      return AppColor.subPrimary;
     } else {
-      return Colors.orange;
+      return AppColor.warning;
     }
   }
 }

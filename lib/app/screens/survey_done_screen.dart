@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kalahok_mobile/app/blocs/survey/survey_bloc.dart';
 import 'package:kalahok_mobile/app/data/models/survey_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 import 'package:kalahok_mobile/app/screens/home_screen.dart';
 import 'package:kalahok_mobile/app/screens/review_screen.dart';
 
@@ -36,9 +37,9 @@ class SurveyDoneScreen extends StatelessWidget {
   Widget buildForReview(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blueGrey, Colors.indigo],
+            colors: AppColor.linearGradient,
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),
@@ -56,23 +57,23 @@ class SurveyDoneScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
-              const SizedBox(
+              SizedBox(
                 child: Text(
                   "Please answer all the",
                   style: TextStyle(
                     fontSize: 23,
-                    color: Color(0xfff8d7da),
+                    color: AppColor.error,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               const SizedBox(height: 2),
-              const SizedBox(
+              SizedBox(
                 child: Text(
                   "required questions!",
                   style: TextStyle(
                     fontSize: 23,
-                    color: Color(0xfff8d7da),
+                    color: AppColor.error,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -93,18 +94,18 @@ class SurveyDoneScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: AppColor.subPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(33),
                         ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             'BACK TO REVIEW',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: AppColor.subSecondary,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
@@ -125,9 +126,9 @@ class SurveyDoneScreen extends StatelessWidget {
   Widget buildDone(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.blueGrey, Colors.indigo],
+            colors: AppColor.linearGradient,
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
           ),
@@ -144,12 +145,12 @@ class SurveyDoneScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 45),
-              const SizedBox(
+              SizedBox(
                 child: Text(
                   "You're all set!",
                   style: TextStyle(
                     fontSize: 23,
-                    color: Colors.white,
+                    color: AppColor.subPrimary,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -170,18 +171,18 @@ class SurveyDoneScreen extends StatelessWidget {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
+                        backgroundColor: AppColor.subPrimary,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(33),
                         ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             'BACK TO HOME',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: AppColor.subSecondary,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),

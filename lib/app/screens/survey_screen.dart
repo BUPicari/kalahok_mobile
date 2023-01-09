@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kalahok_mobile/app/blocs/survey/survey_bloc.dart';
 import 'package:kalahok_mobile/app/data/models/survey_model.dart';
 import 'package:kalahok_mobile/app/data/models/surveys_model.dart';
+import 'package:kalahok_mobile/app/helpers/variables.dart';
 import 'package:kalahok_mobile/app/screens/question_screen.dart';
 import 'package:kalahok_mobile/app/screens/error_screen.dart';
 
@@ -44,9 +45,9 @@ class SurveyScreen extends StatelessWidget {
   Widget buildContent({context, required Survey survey}) {
     return Container(
       padding: const EdgeInsets.all(30),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [Colors.blueGrey, Colors.indigo],
+          colors: AppColor.linearGradient,
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
         ),
@@ -56,30 +57,30 @@ class SurveyScreen extends StatelessWidget {
           Expanded(
             child: Column(children: [
               const SizedBox(height: 45),
-              const Text(
+              Text(
                 ' Hi, Welcome to',
                 style: TextStyle(
                   fontSize: 23,
-                  color: Colors.white,
+                  color: AppColor.subPrimary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 survey.title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 20,
-                  color: Colors.orange,
+                  color: AppColor.warning,
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 10),
-              const Text(
+              Text(
                 'Read each questions thoroughly, submit once done with the survey.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColor.subPrimary,
                 ),
               ),
             ]),
@@ -106,18 +107,18 @@ class SurveyScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
+                    backgroundColor: AppColor.subPrimary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(33),
                     ),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         'GET STARTED',
                         style: TextStyle(
-                          color: Colors.black,
+                          color: AppColor.subSecondary,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
                         ),
