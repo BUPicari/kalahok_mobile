@@ -34,18 +34,20 @@ class WaiverScreen extends StatelessWidget {
                     SizedBox(
                       child: Image.asset(
                         'assets/images/survey-waiver.png',
-                        height: 200,
+                        height: 300,
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 50),
                     SizedBox(
                       child: Text(
-                        survey.description,
+                        survey.waiver,
                         style: TextStyle(
                           fontSize: 18,
                           color: AppColor.subPrimary,
                           fontWeight: FontWeight.bold,
+                          fontStyle: FontStyle.italic,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ]),

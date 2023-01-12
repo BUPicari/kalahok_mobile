@@ -63,7 +63,6 @@ class CategorySurveyScreen extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.all(16),
                 children: [
-                  const SizedBox(height: 8),
                   buildCategorySurveys(categorySurvey: state.categorySurvey),
                 ],
               );
@@ -105,16 +104,13 @@ class CategorySurveyScreen extends StatelessWidget {
       child: GridView(
         primary: false,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
+          crossAxisCount: 1,
           childAspectRatio: 4 / 3,
           crossAxisSpacing: 10,
           mainAxisSpacing: 10,
         ),
         children: categorySurvey.survey
-            .map((survey) => CategorySurveyWidget(
-                  survey: survey,
-                  image: categorySurvey.image,
-                ))
+            .map((survey) => CategorySurveyWidget(survey: survey))
             .toList(),
       ),
     );

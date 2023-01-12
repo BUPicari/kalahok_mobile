@@ -1,18 +1,14 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:kalahok_mobile/app/configs/api_config.dart';
 import 'package:kalahok_mobile/app/data/models/surveys_model.dart';
 import 'package:kalahok_mobile/app/helpers/variables.dart';
 import 'package:kalahok_mobile/app/screens/waiver_screen.dart';
 
 class CategorySurveyWidget extends StatelessWidget {
   final Surveys survey;
-  final String image;
 
   const CategorySurveyWidget({
     Key? key,
     required this.survey,
-    required this.image,
   }) : super(key: key);
 
   @override
@@ -22,27 +18,92 @@ class CategorySurveyWidget extends StatelessWidget {
         builder: (context) => WaiverScreen(survey: survey),
       )),
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(30),
         decoration: BoxDecoration(
-          color: Colors.primaries[Random().nextInt(Colors.primaries.length)],
-          borderRadius: BorderRadius.circular(15),
+          color: AppColor.subPrimary,
+          border: Border(
+            bottom: BorderSide(
+              width: 3,
+              color: AppColor.primary,
+            ),
+          ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.network(
-              ApiConfig.baseUrl + image,
-              width: 70,
-            ),
-            const SizedBox(height: 10),
             Text(
               survey.title,
               style: TextStyle(
-                color: AppColor.subPrimary,
+                color: AppColor.warning,
                 fontWeight: FontWeight.bold,
-                fontSize: 12,
+                fontSize: 20,
               ),
               textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              survey.description.replaceAll("\n", ""),
+              style: TextStyle(
+                fontSize: 15,
+                fontStyle: FontStyle.italic,
+                color: AppColor.subSecondary,
+              ),
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 4,
+            ),
+            const SizedBox(height: 15),
+            Text(
+              "Available from",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: AppColor.neutral,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              "${survey.startDate} to ${survey.endDate}",
+              style: TextStyle(
+                fontSize: 15,
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.bold,
+                color: AppColor.secondary,
+              ),
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              height: 40,
+              width: 160,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WaiverScreen(survey: survey),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColor.primary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(33),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'TAKE SURVEY',
+                      style: TextStyle(
+                        color: AppColor.subPrimary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

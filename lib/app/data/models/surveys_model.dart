@@ -4,6 +4,7 @@ class Surveys {
   int id;
   String title;
   String description;
+  String waiver;
   String completionEstimatedTime;
   bool status;
   bool multipleSubmission;
@@ -17,6 +18,7 @@ class Surveys {
     required this.id,
     required this.title,
     required this.description,
+    required this.waiver,
     required this.completionEstimatedTime,
     required this.status,
     required this.multipleSubmission,
@@ -34,6 +36,7 @@ class Surveys {
       id: json['id'],
       title: json['title'],
       description: json['description'],
+      waiver: json['waiver'],
       completionEstimatedTime: json['completion_estimated_time'],
       status: json['status'],
       multipleSubmission: json['multipleSubmission'],
@@ -50,6 +53,7 @@ class Surveys {
       'id': id,
       'title': title,
       'description': description,
+      'waiver': waiver,
       'completion_estimated_time': completionEstimatedTime,
       'status': status,
       'multiple_submission': multipleSubmission,
